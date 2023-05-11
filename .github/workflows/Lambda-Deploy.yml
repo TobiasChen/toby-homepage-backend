@@ -10,7 +10,7 @@ on:
       - dev
     paths:
     - aws
-    
+
 jobs:
   build:
     runs-on: ubuntu-latest
