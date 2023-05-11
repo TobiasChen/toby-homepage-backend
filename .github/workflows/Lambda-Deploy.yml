@@ -52,4 +52,4 @@ jobs:
 
       - name: Upload Lambda Source Code
         working-directory: ./aws
-        run: aws lambda update-function-code --function-name homepage-visitorCount-lambda --zip-file upload.zip
+        run: aws lambda update-function-code --function-name homepage-visitorCount-lambda --zip-file fileb://./upload.zip --publish
