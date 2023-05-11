@@ -2,7 +2,7 @@ const vis = require("../src/visitorCount")
 
 jest.mock('aws-sdk', () => {
     return {
-      DynamoDB: { // just an object, not a function
+      DynamoDB: { 
         DocumentClient: jest.fn(() => ({
           update: jest.fn(() => ({
             promise: jest.fn(() => ({"visits": 1}))
