@@ -10,7 +10,7 @@ on:
       - dev
     paths:
     - aws
-  jobs:
+jobs:
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 10
