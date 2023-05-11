@@ -12,6 +12,7 @@ jest.mock('aws-sdk', () => {
     });
 
 
+    
 test("On Get, return 200 with Value",async ()=> {
     const event = {"httpMethod": "GET"}
     await expect( vis.handler(event)).resolves.toEqual({"body": "{\"visits\":1}", "headers": {"Content-Type": "application/json"}, "statusCode": 200})
