@@ -1,0 +1,53 @@
+name: Deploy Frontend
+
+permissions:
+  id-token: write
+  contents: read
+
+on:
+  push:
+    branches:
+      - dev
+    paths:
+    - aws
+  jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        
+        with:
+          node-version: 18
+      - name: Caching  Node Modules
+        id: node-cache-build
+        uses: actions/cache@v3
+        with:
+          path: |
+            aws/node_modules
+          key: ${{ runner.os }}--toby-homepage-site-build-${{ github.run_id }}
+          restore-keys: |
+            ${{ runner.os }}-toby-homepage-site-build-
+      - name: Install dependencies
+        working-directory: ./aws
+        run: npm install
+
+      - name: Run Tests
+        working-directory: ./aws
+        run: npm run test
+
+      - name: Set AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: ${{ secrets.DEV_DEPLOY_ROLE }}
+          role-session-name: OIDCSession
+          aws-region: eu-central-1
+
+      - name: Zip Source Code
+        working-directory: ./aws
+        run: zip upload.zip ./src/* -r
+
+      - name: Upload Lambda Source Code
+        working-directory: ./aws
+        run: s3 lambda update-function-code --function-name homepage-visitorCount-lambda --zip-file upload.zip
