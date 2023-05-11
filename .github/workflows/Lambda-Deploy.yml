@@ -10,6 +10,7 @@ on:
       - dev
     paths:
     - 'aws**'
+    - '.github\workflows\Lambda-Deploy.yml'
 
 jobs:
   build:
@@ -51,4 +52,4 @@ jobs:
 
       - name: Upload Lambda Source Code
         working-directory: ./aws
-        run: s3 lambda update-function-code --function-name homepage-visitorCount-lambda --zip-file upload.zip
+        run: aws lambda update-function-code --function-name homepage-visitorCount-lambda --zip-file upload.zip
