@@ -1,0 +1,13 @@
+{
+    "name": "toby-homepage-backend",
+    "private": true,
+    "version": "1.0.0",
+    "type": "commonjs",
+    "scripts": {
+        "test": "jest"
+    },
+    "devDependencies": {
+        "aws-sdk": "^2.1376.0",
+        "jest": "^29.5.0"
+    }
+}
