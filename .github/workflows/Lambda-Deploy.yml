@@ -8,7 +8,7 @@ on:
   push:
     branches:
       - dev
-    paths: ['aws**','.github\workflows\Lambda-Deploy.yml']
+    paths: ['aws**', .github\workflows\Lambda-Deploy.yml]
 
 jobs:
   build:
