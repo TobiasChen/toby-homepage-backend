@@ -1,4 +1,4 @@
-name: Deploy Frontend
+name: Deploy Backend to AWS
 
 permissions:
   id-token: write
