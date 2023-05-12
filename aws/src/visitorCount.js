@@ -16,9 +16,9 @@ exports.handler = async (event, context) => {
                     Key: {
                         "id" : 0
                     },
-                    UpdateExpression: "SET visits = visits + :incr",
+                    UpdateExpression: "SET visits = if_not_exists(visits, :zero) + :incr",
                     ReturnValues: "ALL_NEW",
-                    ExpressionAttributeValues: {':incr':1}
+                    ExpressionAttributeValues: {':incr':1, ':zero':0}
                 }
                 body = await dynamo.update(param).promise()
                 break;
